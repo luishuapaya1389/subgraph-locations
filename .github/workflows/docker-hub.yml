@@ -44,6 +44,7 @@ jobs:
         NEW_VER_PATCH=$((CURRENT_VER_PATCH+1))
         echo "version actual incrementada $NEW_VER_PATCH"
         NEW_VER="$CURRENT_VER_MAJOR.$CURRENT_VER_MINOR.$NEW_VER_PATCH"
+        echo "NEW_VER_2=$CURRENT_VER_MAJOR.$CURRENT_VER_MINOR.$NEW_VER_PATCH" >> $GITHUB_ENV
         echo "version actual de la imagen $NEW_VER"
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
@@ -51,6 +52,6 @@ jobs:
         context: .
         push: true
         tags:
-          luishuapaya/subgraph-locations:${{ env.NEW_VER }}
+          luishuapaya/subgraph-locations:${{ env.NEW_VER_2 }}
         build-args: |
-          VERSION=${{ env.NEW_VER }}
+          VERSION=${{ env.NEW_VER_2 }}
