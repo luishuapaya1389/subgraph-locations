@@ -41,3 +41,5 @@ jobs:
         CURRENT_VER_MINOR=${CURRENT_VER_ARR[1]}
         CURRENT_VER_PATCH=${CURRENT_VER_ARR[2]}
         echo "ultimo parametro de la version - $CURRENT_VER_PATCH"
+        NEW_VER_PATCH=$((CURRENT_VER_PATCH+1))
+        echo "version actual incrementada $NEW_VER_PATCH"
