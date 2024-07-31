@@ -43,3 +43,5 @@ jobs:
         echo "ultimo parametro de la version - $CURRENT_VER_PATCH"
         NEW_VER_PATCH=$((CURRENT_VER_PATCH+1))
         echo "version actual incrementada $NEW_VER_PATCH"
+        NEW_VER="$CURRENT_VER_MAJOR.$CURRENT_VER_MINOR.$NEW_VER_PATCH"
+        echo "version actual de la imagen $NEW_VER"
