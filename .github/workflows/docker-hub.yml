@@ -35,26 +35,9 @@ jobs:
     - name: Check outputs
       run: |
         echo "Latest Image Tag - ${{ steps.latest_tag.outputs.tag }}"
-
-    - name: Extract version from git tag (if applicable)
-      id: extract_version
-      run: |
-        GIT_TAG=$(git describe --tags --abbrev=0 --exact-match 2>/dev/null || true)
-        if [ -n "$GIT_TAG" ]; then
-          echo "VERSION=${GIT_TAG#v}" >> $GITHUB_ENV
-          echo "IS_TAG=true" >> $GITHUB_ENV
-        else
-          COMMIT_SHA=$(git rev-parse --short "$GITHUB_SHA")
-          echo "VERSION=1.0.0-$COMMIT_SHA" >> $GITHUB_ENV
-          echo "IS_TAG=false" >> $GITHUB_ENV
-        fi
-
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        push: true
-        tags:
-          luishuapaya/subgraph-locations:${{ env.VERSION }}
-        build-args: |
-          VERSION=${{ env.VERSION }}
+        CURRENT_VER=${{ steps.latest_tag.outputs.tag }}
+        CURRENT_VER_ARR=(${CURRENT_VER//./ }) # Replaces dots with spaces then convert to array
+        CURRENT_VER_MAJOR=${CURRENT_VER_ARR[0]}
+        CURRENT_VER_MINOR=${CURRENT_VER_ARR[1]}
+        CURRENT_VER_PATCH=${CURRENT_VER_ARR[2]}
+        echo "ultimo parametro de la version - $CURRENT_VER_PATCH"
