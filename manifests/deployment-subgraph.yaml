@@ -18,6 +18,7 @@ spec:
           ports:
             - containerPort: 4001
               name: http-locations
+              imagePullPolicy: "Always"
   replicas: 2
   selector:
     matchLabels:
