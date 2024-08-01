@@ -15,10 +15,10 @@ spec:
       containers:
         - name: container-subgraph-locations
           image: docker.io/luishuapaya/subgraph-locations:1.0.4 # {"$imagepolicy":"flux-system:image-policy-subgraph-locations"}
+          imagePullPolicy: "Always"
           ports:
             - containerPort: 4001
               name: http-locations
-              imagePullPolicy: "Always"
   replicas: 2
   selector:
     matchLabels:
