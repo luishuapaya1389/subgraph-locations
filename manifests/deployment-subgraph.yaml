@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-subgraph-locations
+  labels:
+    type: supergraph-poc
+  namespace: subgraph-app
+spec:
+  template:
+    metadata:
+      name: pod-subgraph-locations
+      labels:
+        type: subgraph-locations
+    spec:
+      containers:
+        - name: container-subgraph-locations
+          image: docker.io/luishuapaya/subgraph-locations:1.0.0 # {"$imagepolicy":"flux-system:image-policy-subgraph-locations"}
+          imagePullPolicy: "Always"
+          ports:
+            - containerPort: 4001
+              name: http-locations
+  replicas: 2
+  selector:
+    matchLabels:
+      type: subgraph-locations
